@@ -1,0 +1,15 @@
+.item {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav p {
+    display: flex;
+    justify-content: center;
+    border: black 1px solid;
+    width: 260px;
+}
