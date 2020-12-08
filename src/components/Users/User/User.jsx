@@ -7,10 +7,10 @@ const User = (props) => {
     let copyArr = array.slice();
     let user = copyArr.find((item) => item.id === props.user.id);
     if (user !== undefined) {
-      if (user.modalWindowState) {
-        return (user.modalWindowState = false);
+      if (user.personalInfo) {
+        return (user.personalInfo = false);
       } else {
-        return (user.modalWindowState = true);
+        return (user.personalInfo = true);
       }
     }
   };
@@ -19,8 +19,8 @@ const User = (props) => {
     <div>
       <div
         onClick={() => {
-          props.modalWindowStateChange(
-            props.users,
+          props.personalInfoStateChange(
+            props.allUsers,
             modalWindow(props.users),
             props.user.id
           );
@@ -34,7 +34,7 @@ const User = (props) => {
         <p>{props.user.phone}</p>
       </div>
       <div>
-        {props.user.modalWindowState ? (
+        {props.user.personalInfo ? (
           props.user.address !== undefined ? (
             <AddInfoUser user={props.user} />
           ) : (

@@ -1,18 +1,15 @@
 import React from "react";
 import Users from "./Users";
 import loading from "./../../assets/img/loading.gif";
+import { connect } from "react-redux";
+import {
+  addNewUser,
+  changeModalWindowState,
+  changeSortArrayState,
+  getUsers,
+} from "../../redux/redusers/user-reducer";
 class UsersContainer extends React.Component {
   state = {
-    users: [],
-    filterUsers: [],
-    sortArr: false,
-    inputValue: "",
-    modalWindowState: false,
-    inputValueId: "",
-    inputValueFirstName: "",
-    inputValueLastName: "",
-    inputValueEmail: "",
-    inputValuePhone: "",
     activePage: 15,
     pageSize: 10,
     totalUsersCount: 0,
@@ -24,14 +21,7 @@ class UsersContainer extends React.Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        this.setState({
-          users: data.map((item) => {
-            return {
-              ...item,
-              modalWindowState: false,
-            };
-          }),
-        });
+        this.props.getUsers(data);
       });
   }
 
@@ -39,78 +29,52 @@ class UsersContainer extends React.Component {
     let copyUsers = array.slice();
     let findUser = copyUsers.find((item) => item.id === id);
     if (findUser !== undefined) {
-      findUser.modalWindowState = value;
+      findUser.personalInfo = value;
     }
     this.setState({
       users: copyUsers,
     });
   };
 
-  changeArr = (newArr) => {
-    this.setState({ users: newArr });
-  };
-
-  onChangeFilterUsers = (newArr) => {
-    if (this.state.inputValue === "") {
-      this.setState({ filterUsers: [] });
-    } else {
-      this.setState({ filterUsers: newArr });
-    }
-  };
-
-  changeCkickCount = (param) => {
-    this.setState({ sortArr: param });
-  };
-
   onChangeInputValue = (value) => {
     this.setState({ inputValue: value.trim() });
   };
 
-  changeModaleWindowState = (field, value) => {
-    this.setState({ [field]: value });
-  };
-
-  onChangeValueInModaleWindow = (field, value) => {
-    if (field === "inputValueId") {
-      this.setState({ [field]: value });
+  sortArray = (array, field) => {
+    let newArray;
+    console.log("props.sortArrayState", this.props.sortArrayState);
+    if (this.props.sortArrayState) {
+      newArray = array.slice().sort(function (a, b) {
+        console.log("сортировка по фолс");
+        if (a[field] > b[field]) return -1;
+        if (a[field] < b[field]) return 1;
+        return 0;
+      });
     } else {
-      this.setState({ [field]: value.trim() });
+      newArray = array.slice().sort(function (a, b) {
+        console.log("сортировка по тру");
+        if (a[field] > b[field]) return 1;
+        if (a[field] < b[field]) return -1;
+        return 0;
+      });
     }
-  };
-
-  addNewUser = (user) => {
-    let arr = this.state.users;
-    console.log(user);
-    let newArr = arr.slice();
-    newArr.splice(0, 0, user);
-    this.setState({
-      users: newArr,
-      inputValueId: "",
-      inputValueFirstName: "",
-      inputValueLastName: "",
-      inputValueEmail: "",
-      inputValuePhone: "",
-    });
+    return newArray;
   };
 
   render() {
-    return this.state.users.length !== 0 ? (
+    return this.props.users.length !== 0 ? (
       <div>
         <Users
+          sortArray={this.sortArray}
+          filterUsers={this.props.filterUsers}
           addNewUser={this.addNewUser}
-          state={this.state}
-          filterUsers={this.state.filterUsers}
-          changeArr={this.changeArr}
-          changeCkickCount={this.changeCkickCount}
-          sortArr={this.state.sortArr}
-          users={this.state.users}
+          sortArrayState={this.props.sortArrayState}
+          changeSortArrayState={this.props.changeSortArrayState}
+          users={this.props.users}
           inputValue={this.state.inputValue}
           onChangeInputValue={this.onChangeInputValue}
-          onChangeFilterUsers={this.onChangeFilterUsers}
-          changeModaleWindowState={this.changeModaleWindowState}
-          onChangeValueInModaleWindow={this.onChangeValueInModaleWindow}
-          modalWindowStateChange={this.modalWindowStateChange}
-          handlePageChange={this.handlePageChange}
+          modalWindowState={this.props.modalWindowState}
+          changeModalWindowState={this.props.changeModalWindowState}
         />
       </div>
     ) : (
@@ -119,4 +83,19 @@ class UsersContainer extends React.Component {
   }
 }
 
-export default UsersContainer;
+let mapStateToProps = (state) => {
+  // console.log("state in usersconteiner", state.usersReducer.sortArrayState);
+  return {
+    users: state.usersReducer.users,
+    sortArrayState: state.usersReducer.sortArrayState,
+    modalWindowState: state.usersReducer.modalWindowState,
+    filterUsers: state.usersReducer.filterUsers,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getUsers,
+  changeSortArrayState,
+  addNewUser,
+  changeModalWindowState,
+})(UsersContainer);
