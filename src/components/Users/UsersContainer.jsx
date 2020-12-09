@@ -7,6 +7,7 @@ import {
   changeModalWindowState,
   changeSortArrayState,
   getUsers,
+  handlePageChange,
 } from "../../redux/redusers/user-reducer";
 class UsersContainer extends React.Component {
   dataRequest = (value) => {
@@ -24,7 +25,6 @@ class UsersContainer extends React.Component {
     let newArray;
     if (this.props.sortArrayState) {
       newArray = array.slice().sort(function (a, b) {
-        console.log("сортировка по фолс");
         if (a[field] > b[field]) return -1;
         if (a[field] < b[field]) return 1;
         return 0;
@@ -71,6 +71,8 @@ class UsersContainer extends React.Component {
           modalWindowState={this.props.modalWindowState}
           changeModalWindowState={this.props.changeModalWindowState}
           isFetching={this.props.isFetching}
+          handlePageChange={this.props.handlePageChange}
+          activePage={this.props.activePage}
         />
       </div>
     );
@@ -84,6 +86,7 @@ let mapStateToProps = (state) => {
     modalWindowState: state.usersReducer.modalWindowState,
     filterUsers: state.usersReducer.filterUsers,
     isFetching: state.usersReducer.isFetching,
+    activePage: state.usersReducer.activePage,
   };
 };
 
@@ -93,4 +96,5 @@ export default connect(mapStateToProps, {
   addNewUser,
   changeModalWindowState,
   changeIsFetching,
+  handlePageChange,
 })(UsersContainer);

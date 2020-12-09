@@ -8,42 +8,54 @@ import UsersFilterContainer from "./UsersFilter/UsersFilterContainer";
 import loading from "./../../assets/img/loading.gif";
 
 const Users = (props) => {
+  console.log("page", props.activePage);
   let elemUser =
     props.filterUsers === undefined || props.filterUsers.length === 0
-      ? props.users.map((user) => {
-          return (
-            <UserContainer
-              key={user.id + user.firstName}
-              users={props.users}
-              user={user}
-            />
-          );
-        })
-      : props.filterUsers.map((user) => {
-          return (
-            <UserContainer
-              key={user.id}
-              user={user}
-              users={props.filterUsers}
-            />
-          );
-        });
+      ? props.users
+          .slice((props.activePage - 1) * 50, props.activePage * 50)
+          .map((user) => {
+            return (
+              <UserContainer
+                key={user.id + user.firstName}
+                users={props.users}
+                user={user}
+              />
+            );
+          })
+      : props.filterUsers
+          .slice((props.activePage - 1) * 50, props.activePage * 50)
+          .map((user) => {
+            return (
+              <UserContainer
+                key={user.id}
+                user={user}
+                users={props.filterUsers}
+              />
+            );
+          });
 
   return (
     <div className={style.item}>
-      {/* <Paginator
-        totalItemsCount={props.state.users.length}
-        pageSize={10}
-        currentPage={1}
-        // onPageChange={onPageChanged}
-      /> */}
-      {/* <Pagination
-        activePage={props.state.activePage}
-        itemsCountPerPage={50}
-        totalItemsCount={props.state.users.length}
-        pageRangeDisplayed={5}
-        onChange={props.handlePageChange.bind(this)}
-      /> */}
+      {(props.filterUsers === undefined || props.filterUsers.length === 0
+        ? props.users.length
+        : props.filterUsers.length) <= 50 ? null : (
+        <Pagination
+          activeClass={style.activeA}
+          linkClass={style.linkA}
+          innerClass={style.pagination}
+          itemClass={style.itemLi}
+          activePage={props.activePage}
+          activeLinkClass={style.activePage}
+          itemsCountPerPage={50}
+          totalItemsCount={
+            props.filterUsers === undefined || props.filterUsers.length === 0
+              ? props.users.length
+              : props.filterUsers.length
+          }
+          pageRangeDisplayed={5}
+          onChange={props.handlePageChange}
+        />
+      )}
       <UsersFilterContainer />
       <button
         className={style.buttonAdd}

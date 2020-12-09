@@ -45,3 +45,44 @@
     width: 500px;
     margin-top: 100px;
 }
+
+.pagination {
+    display: flex;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.itemLi {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #337ab7;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+    list-style-type: none;
+}
+
+.activeA {
+    text-decoration: none;
+    z-index: 3;
+    color: #fff !important;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    cursor: default;
+}
+
+.linkA {
+    text-decoration: none;
+    color: black;
+}
+
+.activePage {
+    text-decoration: none;
+    color: white;
+}

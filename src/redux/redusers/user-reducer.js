@@ -7,6 +7,7 @@ export const CHANGE_MODAL_WINDOW_STATE = "CHANGE_MODAL_WINDOW_STATE";
 export const CHANGE_VALUE_INPUT_IN_MW = "CHANGE_VALUE_INPUT_IN_MW";
 export const CHANGE_PERSONAL_INFO_STATE = "CHANGE_PERSONAL_INFO_STATE";
 export const IS_FETCHING = "IS_FETCHING";
+export const HANDLE_PAGE_CHANGE = "HANDLE_PAGE_CHANGE";
 
 let initialState = {
   users: [],
@@ -20,6 +21,7 @@ let initialState = {
   inputValuePhone: "",
   modalWindowState: false,
   isFetching: false,
+  activePage: 1,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -91,11 +93,16 @@ const usersReducer = (state = initialState, action) => {
         users: copyUsers,
       };
     case IS_FETCHING:
-      // if(state.users.length!==0)
       return {
         ...state,
         isFetching: action.value,
       };
+    case HANDLE_PAGE_CHANGE: {
+      return {
+        ...state,
+        activePage: action.numPage,
+      };
+    }
     default:
       return state;
   }
@@ -161,6 +168,12 @@ export const changeIsFetching = (value) => {
   return {
     type: IS_FETCHING,
     value,
+  };
+};
+export const handlePageChange = (numPage) => {
+  return {
+    type: HANDLE_PAGE_CHANGE,
+    numPage,
   };
 };
 
