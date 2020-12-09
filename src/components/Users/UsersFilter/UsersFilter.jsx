@@ -1,8 +1,9 @@
 import React from "react";
+import style from "./UsersFilter.module.css";
 
 const UsersFilter = (props) => {
   return (
-    <div>
+    <div className={style.item}>
       <input
         value={props.searchInputValue}
         onChange={(e) => props.changeSearchInputValue(e.target.value)}

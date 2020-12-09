@@ -6,6 +6,7 @@ export const ADD_NEW_USER = "ADD_NEW_USER";
 export const CHANGE_MODAL_WINDOW_STATE = "CHANGE_MODAL_WINDOW_STATE";
 export const CHANGE_VALUE_INPUT_IN_MW = "CHANGE_VALUE_INPUT_IN_MW";
 export const CHANGE_PERSONAL_INFO_STATE = "CHANGE_PERSONAL_INFO_STATE";
+export const IS_FETCHING = "IS_FETCHING";
 
 let initialState = {
   users: [],
@@ -18,6 +19,7 @@ let initialState = {
   inputValueEmail: "",
   inputValuePhone: "",
   modalWindowState: false,
+  isFetching: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -94,6 +96,12 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         users: copyUsers,
       };
+    case IS_FETCHING:
+      // if(state.users.length!==0)
+      return {
+        ...state,
+        isFetching: action.value,
+      };
     default:
       return state;
   }
@@ -152,6 +160,13 @@ export const personalInfoStateChange = (array, value, id) => {
     array,
     value,
     id,
+  };
+};
+
+export const changeIsFetching = (value) => {
+  return {
+    type: IS_FETCHING,
+    value,
   };
 };
 

@@ -1,15 +1,47 @@
 .item {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .nav {
     display: flex;
 }
 
-.nav p {
+.nav span {
     display: flex;
     justify-content: center;
     border: black 1px solid;
     width: 260px;
+    background-color: #a3ffa3;
+    border-left: none;
+}
+
+.nav span:first-child {
+    border-left: black 1px solid;
+}
+
+.usersList {
+    max-width: 1306px;
+    /* min-width: 1300px; */
+}
+
+.table {
+    margin: 0 auto;
+}
+
+.buttonAdd {
+    width: 20%;
+    height: 40px;
+    margin: 0 auto;
+    background-color: #a7c1ff;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.img {
+    width: 500px;
+    margin-top: 100px;
 }

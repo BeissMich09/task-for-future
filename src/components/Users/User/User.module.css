@@ -1,9 +1,20 @@
 .item {
     display: flex;
     border: black 1px solid;
+    height: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #e1ffe1;
+}
+
+.item:hover {
+    background-color: #67e667;
 }
 
 .item p {
-    border: 1px solid red;
     width: 260px;
+    margin: 0;
+    padding: 0;
 }

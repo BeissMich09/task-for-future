@@ -1,0 +1,19 @@
+.item {
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.item input {
+    width: 50%;
+    height: 25px;
+    border-radius: 3px 0px 0px 3px;
+}
+
+.item button {
+    width: 13%;
+    height: 31px;
+    background-color: #a7c1ff;
+    border-radius: 0px 3px 3px 0px;
+}

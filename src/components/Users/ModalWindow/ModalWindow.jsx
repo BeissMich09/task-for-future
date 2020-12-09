@@ -3,8 +3,8 @@ import style from "./ModaleWindow.module.css";
 
 const ModalWindow = (props) => {
   return (
-    <div>
-      <div>
+    <div className={style.item}>
+      <div className={style.param}>
         <p>id:</p>{" "}
         <input
           value={+props.inputValueId}
@@ -14,7 +14,7 @@ const ModalWindow = (props) => {
           }
         />
       </div>
-      <div>
+      <div className={style.param}>
         <p>First Name:</p>{" "}
         <input
           value={props.inputValueFirstName}
@@ -24,7 +24,7 @@ const ModalWindow = (props) => {
           }
         />
       </div>
-      <div>
+      <div className={style.param}>
         <p>Last Name:</p>{" "}
         <input
           value={props.inputValueLastName}
@@ -34,7 +34,7 @@ const ModalWindow = (props) => {
           }
         />
       </div>
-      <div>
+      <div className={style.param}>
         <p>Email:</p>{" "}
         <input
           value={props.inputValueEmail}
@@ -45,7 +45,7 @@ const ModalWindow = (props) => {
           }
         />
       </div>
-      <div>
+      <div className={style.param}>
         <p>Phone:</p>{" "}
         <input
           value={props.inputValuePhone}

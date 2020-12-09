@@ -1,1 +1,25 @@
+.item p {
+    margin: 0;
+    padding: 0;
+    width: 108px;
+}
 
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.param {
+    display: flex;
+    margin-top: 5px;
+}
+
+.item button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 31px;
+    background-color: #a7c1ff;
+    border-radius: 3px;
+}
