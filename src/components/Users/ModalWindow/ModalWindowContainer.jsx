@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   addNewUser,
-  changeModalWindowState,
   changeValueInputInMW,
 } from "../../../redux/redusers/user-reducer";
 import ModalWindow from "./ModalWindow";
@@ -37,7 +36,6 @@ class ModalWindowContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-    console.log("state in MWC",state)
   return {
     inputValueId: state.usersReducer.inputValueId,
     inputValueFirstName: state.usersReducer.inputValueFirstName,
@@ -49,6 +47,5 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   addNewUser,
-//   changeModalWindowState,
   changeValueInputInMW,
 })(ModalWindowContainer);

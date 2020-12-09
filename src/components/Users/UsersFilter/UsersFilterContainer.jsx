@@ -35,7 +35,6 @@ class UsersFilterContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  console.log("UsersFilterContainer state===>", state);
   return {
     filterUsers: state.usersReducer.usersFilter,
     users: state.usersReducer.users,

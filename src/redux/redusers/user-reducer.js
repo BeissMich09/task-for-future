@@ -23,7 +23,6 @@ let initialState = {
 };
 
 const usersReducer = (state = initialState, action) => {
-  console.log("state13", state);
   switch (action.type) {
     case GET_USERS:
       return {
@@ -54,15 +53,12 @@ const usersReducer = (state = initialState, action) => {
         };
       }
     case CHANGE_SORT_ARRAY_STATE:
-      console.log("state.sortArrayState", state.sortArrayState);
-      console.log("testAction", action);
       return {
         ...state,
         users: action.users,
         sortArrayState: !state.sortArrayState,
       };
     case ADD_NEW_USER:
-      console.log("1231231231", action);
       let newArr = state.users.slice();
       newArr.splice(0, 0, action.user);
       return {
@@ -75,13 +71,11 @@ const usersReducer = (state = initialState, action) => {
         inputValuePhone: "",
       };
     case CHANGE_MODAL_WINDOW_STATE:
-      console.log("action в CHANGE_MODAL_WINDOW_STATE", action);
       return {
         ...state,
         [action.name]: action.value,
       };
     case CHANGE_VALUE_INPUT_IN_MW:
-      console.log("lalalalala", action);
       return {
         ...state,
         [action.name]: action.value,
