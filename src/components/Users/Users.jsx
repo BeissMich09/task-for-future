@@ -8,7 +8,6 @@ import UsersFilterContainer from "./UsersFilter/UsersFilterContainer";
 import loading from "./../../assets/img/loading.gif";
 
 const Users = (props) => {
-  console.log("page", props.activePage);
   let elemUser =
     props.filterUsers === undefined || props.filterUsers.length === 0
       ? props.users
